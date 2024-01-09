@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="SaveScammer.ProfilesListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SaveScammer"
+             xmlns:Extensions="clr-namespace:SaveScammer.Extentions"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        <ListView Name="listView_profiles" Margin="0,0,0,0" Grid.Column="2" Grid.ColumnSpan="1" 
+                  KeyUp="listView_profiles_KeyUp" 
+                  Extensions:ListViewColumns.Stretch="true"
+                  d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="listView_profiles_SelectionChanged"
+                  SelectionMode="Single">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Profile name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Width="28">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Name="button_profileDelete"
+                                    Margin="0,2,0,0"
+                                    VerticalAlignment="Center"
+                                    Click="button_profileDelete_Click"  HorizontalAlignment="Center" Height="16" Width="16"
+                                    CommandParameter="{Binding}">
+                                    <TextBlock Text="X" Margin="0,-3,0,0"></TextBlock>
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

@@ -1,0 +1,41 @@
+﻿<Window x:Class="SaveScammer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SaveScammer"
+        mc:Ignorable="d"
+        Title="Savescaminator" Height="450" Width="800" MinWidth="650">
+    <Grid Name="grid_main">
+        <TabControl TabStripPlacement="Left">
+            <TabItem Header="Profiles">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="150" Width="150"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition MinWidth="200"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid Name="grid_profileListContainer" Margin="1,1,1,25">
+
+                        </Grid>
+                        <Button Name="button_addProfile" Content="Dodaj profil" Margin="2,2,4,2" VerticalAlignment="Bottom" Click="button_addProfile_Click"/>
+                    </Grid>
+                    <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+                    <Grid Name="grid_profileViewContainer" Grid.Column="2">
+            
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Settings">
+                <local:SettingsView></local:SettingsView>
+            </TabItem>
+            <TabItem Header="Info">
+                <TextBox>
+                    XD
+                </TextBox>
+            </TabItem>
+        </TabControl>
+    </Grid>
+
+</Window>

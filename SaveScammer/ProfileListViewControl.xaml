@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="SaveScammer.ProfileListViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SaveScammer"
+             mc:Ignorable="d" 
+             d:Background="White">
+    <Grid Width="142">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+            <TextBlock Name="textBlock_name">Name</TextBlock>
+        </StackPanel>
+        <Button
+                                    Name="button_profileDelete"
+                                    Margin="2,1,0,0"
+                                    VerticalAlignment="Center"
+                                    Click="button_profileDelete_Click"  HorizontalAlignment="Right" Height="16" Width="16"
+                                    CommandParameter="{Binding}">
+            <TextBlock Text="X" Margin="0,-3,0,0"></TextBlock>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</UserControl>

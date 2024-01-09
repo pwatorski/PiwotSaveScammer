@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>SSI.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="SSI.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SSI.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="SSI.ico" />
+  </ItemGroup>
+
+</Project>

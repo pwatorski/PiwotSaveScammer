@@ -1,0 +1,255 @@
+﻿<UserControl x:Class="SaveScammer.ProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uc="clr-namespace:SaveScammer"
+             xmlns:Extensions="clr-namespace:SaveScammer.Extentions"
+             mc:Ignorable="d" 
+             d:Background="White"
+             Margin="1,1,1,1"
+             MinWidth="410"
+             d:Width="500">
+    <UserControl.Resources>
+        <DataTemplate x:Key="HeaderTemplateArrowUp">
+            <DockPanel LastChildFill="True" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type GridViewColumnHeader}}}">
+                <Path x:Name="arrowUp" StrokeThickness="1" Fill="Gray" Data="M 5,10 L 15,10 L 10,5 L 5,10" DockPanel.Dock="Right" Width="20" HorizontalAlignment="Right" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
+                <TextBlock Text="{Binding }" />
+            </DockPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="HeaderTemplateArrowDown">
+            <DockPanel LastChildFill="True" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type GridViewColumnHeader}}}">
+                <Path x:Name="arrowDown" StrokeThickness="1" Fill="Gray"  Data="M 5,5 L 10,10 L 15,5 L 5,5" DockPanel.Dock="Right" Width="20" HorizontalAlignment="Right" Margin="5,0,5,0" SnapsToDevicePixels="True"/>
+                <TextBlock Text="{Binding }" />
+            </DockPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Border BorderBrush="#FF444444" BorderThickness="1">
+        <Grid Name="grid_main" Margin="2,2,2,2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition MinHeight="150" Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <Grid>
+                    <StackPanel Name="stackPanel_nameHeader" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,0,0,0">
+                        <TextBlock Name="textBlock_headerName" FontSize="16" FontWeight="Bold" Margin="0,0,0,0">
+                        display
+                        </TextBlock>
+                        <TextBox Name="textBox_nameEdit" Text="edit" Margin="0,-1,0,0" d:Visibility="Visible" Visibility="Collapsed" MinWidth="50" FontSize="16" FontWeight="Bold"/>
+                    </StackPanel>
+
+                    <StackPanel Name="stackPanel_editButtons" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,1,2,0">
+                        <Button Name="button_duplicate"
+                        HorizontalAlignment="Right" VerticalAlignment="Top" 
+                        Margin="2,0,0,0" 
+                        d:Visibility="Visible" Visibility="Visible" 
+                        Click="button_duplicate_Click"  Height="19">
+                            <TextBlock Name="textBlock_duplicateButton" Margin="0,-1,0,0">Duplicate</TextBlock>
+                        </Button>
+                        <Button Name="button_save"
+                        HorizontalAlignment="Right" VerticalAlignment="Top" 
+                        Margin="2,0,0,0" 
+                        d:Visibility="Visible" Visibility="Collapsed" 
+                        Click="button_save_Click" Height="19">
+                            <TextBlock Name="textBlock_saveButton" Margin="0,-1,0,0">Save</TextBlock>
+                        </Button>
+                        <Button Name="button_edit_cancel" 
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top" Margin="2,0,0,0" 
+                        Click="button_edit_cancel_Click" Height="19">
+                            <TextBlock Name="textBlock_editButton" Margin="0,-1,0,0">Edit</TextBlock>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <Grid Name="grid_info" Margin="2,0,0,0">
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <StackPanel Name="stackPanel_target" Orientation="Vertical" VerticalAlignment="Top" Margin="0,2,0,0">
+                            <TextBlock Name="textBlock_targetLabel" Text="Target:" Margin="0,2,2,0" FontWeight="Bold"/>
+                            
+                            <StackPanel Name="stackPanel_targetButtons" Orientation="Horizontal" d:Visibility="Visible" Visibility="Collapsed" Margin="0,1,2,0">
+                                <Button Name="button_targetEditFile" Content="Set file" Margin="0,0,0,0" Click="button_targetEditFile_Click" Width="48"/>
+                                <Button Name="button_targetEditDirectory" Content="Set dir" Margin="2,0,0,0" Click="button_targetEditDirectory_Click" Width="48"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="button_showTarget" Content="Open" Margin="0,1,2,0" Click="button_showTarget_Click"/>
+                                <TextBlock Name="textBlock_targetDisplay" Text="/path/to/target" Margin="0,2,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Name="stackPanel_storage" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,0,0">
+
+                            <TextBlock Name="textBlock_storageLabel" Text="Storage:" Margin="0,2,2,0" FontWeight="Bold"/>
+                            <Button Name="button_storageEdit" Content="Set dir" Margin="0,1,2,0" d:Visibility="Visible" Visibility="Collapsed" Click="button_storageEdit_Click" Width="48" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="button_showStorage" Content="Open" Margin="0,1,2,0" Click="button_showStorage_Click"/>
+                                <TextBlock Name="textBlock_storageDisplay" Text="/path/to/storage" Margin="0,2,0,0" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Name="stackPanel_interval" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,0,0">
+                            <TextBlock Name="textBlock_intervalLabel" Text="Interval:" Margin="0,2,2,0" FontWeight="Bold"/>
+                            <TextBlock Name="textBlock_intervalDisplay" Text="0h 5m 0s" Margin="0,2,0,0"/>
+                            <StackPanel Name="stackPanel_intervalEdit" Orientation="Horizontal" d:Visibility="Visible" Visibility="Collapsed">
+                                <TextBox Name="textBox_intervalEditHours" Text="0" Margin="0,1,0,0" MinWidth="20" TextChanged="textBox_intervalEditHours_TextChanged" TextAlignment="Right"/>
+                                <TextBlock Name="textBlock_intervalLabelHours" Text="h" Margin="0,2,0,0"/>
+                                <TextBox Name="textBox_intervalEditMinutes" Text="0" Margin="2,1,0,0" MinWidth="20" TextChanged="textBox_intervalEditMinutes_TextChanged" TextAlignment="Right"/>
+                                <TextBlock Name="textBlock_intervalLabelMinutes" Text="m" Margin="0,2,0,0"/>
+                                <TextBox Name="textBox_intervalEditSeconds" Text="0" Margin="2,1,0,0" MinWidth="20" TextChanged="textBox_intervalEditSeconds_TextChanged" TextAlignment="Right"/>
+                                <TextBlock Name="textBlock_intervalLabelSeconds" Text="s" Margin="0,2,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Name="stackPanel_maxSaves" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,0,0">
+                            <TextBlock Name="textBlock_maxSavesLabel" Text="Max saves:" Margin="0,2,2,0" FontWeight="Bold"/>
+                            <TextBlock Name="textBlock_maxSavesDisplay" Text="5" Margin="0,2,0,0"/>
+                            <TextBox Name="textBox_maxSavesEdit" MinWidth="20" Text="5" Margin="0,1,0,0" d:Visibility="Visible" Visibility="Collapsed" TextAlignment="Right"/>
+                        </StackPanel>
+                        <StackPanel Name="stackPanel_maxSize" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,0,0">
+                            <TextBlock Name="textBlock_maxSizeLabel" Text="Current size:" Margin="0,2,2,0" FontWeight="Bold"/>
+                            <TextBlock Name="textBlock_curSizeDisplay" Text="0 B" Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                <Separator />
+                <Grid Name="grid_controls" Margin="2,2,2,2">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Next save in: "/>
+                            <TextBlock Name="textBlock_timeLeft" Text="00:00:00.00"/>
+                        </StackPanel>
+                        <ProgressBar Name="progressBar_timeLeft" Height="10" Maximum="1000"/>
+                        <StackPanel>
+                            <Grid Margin="0,2,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Button Name="button_toggleSaving" Height="18" Grid.Column="0" Margin="0,0,1,0" Click="button_toggleSaving_Click">
+                                    <TextBlock Name="textBlock_toggleSaving" Text="Enable auto-saving" Margin="0,-2,0,0"/>
+                                </Button>
+                                <Button Name="button_namedSave" Height="18" Grid.Column="1" Margin="1,0,0,0" Click="button_namedSave_Click">
+                                    <TextBlock Name="textBlock_namedSave" Text="Named save" Margin="0,-2,0,0"/>
+                                </Button>
+                                <Button Name="button_snapshot" Height="18" Grid.Column="2" Margin="1,0,0,0" Click="button_snapshot_Click">
+                                    <TextBlock Name="textBlock_snapshot" Text="Snapshot" Margin="0,-2,0,0"/>
+                                </Button>
+                            </Grid>
+
+                            <Grid Name="grid_newName" d:Visibility="Visible" Visibility="Collapsed" Margin="0,2,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" >New name:</TextBlock>
+                                <TextBox Grid.Column="1" Name="textBox_newName" Margin="2,0,0,0" KeyDown="textBox_newName_KeyDown"/>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                    <Button Name="button_acceptNewName" Height="18" Margin="2,0,0,0" Click="button_acceptNewName_Click">
+                                        <TextBlock Text="Accept" Margin="0,-2,0,0"/>
+                                    </Button>
+                                    <Button Name="button_cancelNewName" Height="18" Margin="2,0,0,0" Click="button_cancelNewName_Click">
+                                        <TextBlock Text="Cancel" Margin="0,-2,0,0"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Name="grid_rename" d:Visibility="Visible" Visibility="Collapsed" Margin="0,2,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" >New name:</TextBlock>
+                                <TextBox Grid.Column="1" Name="textBox_reame" Margin="2,0,0,0" KeyDown="textBox_reame_KeyDown"/>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                    <Button Name="button_acceptReame" Height="18" Margin="2,0,0,0" Click="button_acceptReame_Click">
+                                        <TextBlock Text="Accept" Margin="0,-2,0,0"/>
+                                    </Button>
+                                    <Button Name="button_cancelReame" Height="18" Margin="2,0,0,0" Click="button_cancelReame_Click">
+                                        <TextBlock Text="Cancel" Margin="0,-2,0,0"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <ListView Name="listView_saves" Margin="0,0,0,0" Grid.Column="2" Grid.ColumnSpan="1" 
+                    GridViewColumnHeader.Click="listView_saves_Click"
+                  d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="listView_saves_SelectionChanged"
+                  SelectionMode="Single" Grid.Row="1" VerticalAlignment="Top"
+                      Extensions:ListViewColumns.Stretch="True">
+                <ListView.View>
+                    <GridView>
+
+                        <GridViewColumn Width="80"  Header="Save date" DisplayMemberBinding="{Binding DateString}"/>
+                        <GridViewColumn Width="80" Header="Save time" DisplayMemberBinding="{Binding TimeString}"/>
+                        <GridViewColumn Header="Save name" DisplayMemberBinding="{Binding SaveName}"/>
+                        <GridViewColumn Width="60" Header="Size" DisplayMemberBinding="{Binding SizeString}"/>
+                        <GridViewColumn Width="62">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                    Name="button_saveRename"
+                                    Margin="0,2,0,0"
+                                    VerticalAlignment="Center"
+                                    Click="button_saveRename_Click"  HorizontalAlignment="Center" Height="18" Width="50"
+                                    IsEnabled="{Binding ViewMode}"
+                                    CommandParameter="{Binding}">
+                                        <TextBlock Text="Rename" Margin="0,-3,0,0"></TextBlock>
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="4"/>
+                                            </Style>
+
+                                        </Button.Resources>
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="46">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                    Name="button_saveLoad"
+                                    Margin="0,2,0,0"
+                                    VerticalAlignment="Center"
+                                    Click="button_saveLoad_Click"  HorizontalAlignment="Center" Height="18" Width="34"
+                                    IsEnabled="{Binding ViewMode}"
+                                    CommandParameter="{Binding}">
+                                        <TextBlock Text="Load" Margin="0,-3,0,0"></TextBlock>
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="4"/>
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="28">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                    Name="button_saveDelete"
+                                    Margin="0,2,0,0"
+                                    VerticalAlignment="Center"
+                                    Click="button_saveDelete_Click"  HorizontalAlignment="Center" Height="16" Width="16"
+                                    IsEnabled="{Binding ViewMode}"
+                                    CommandParameter="{Binding}">
+                                        <TextBlock Text="X" Margin="0,-3,0,0"></TextBlock>
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="4"/>
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Border>
+</UserControl>
